@@ -8,6 +8,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     imageView.setAnimatableImage(named: "mugen.gif")
+    imageView.startAnimating()
     UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
   }
 
