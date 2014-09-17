@@ -1,11 +1,10 @@
 <img src="https://dl.dropboxusercontent.com/u/148921/assets/logo.svg" width="100" />
 
-Adds animated GIF support to UIKit. For the Japanese prefecture, click [here](https://goo.gl/maps/CCeAc).
+Adds performant animated GIF support to UIKit, without subclassing `UIImagevIew`. For the Japanese prefecture, click [here](https://goo.gl/maps/CCeAc).
 
 #### Why?
 
-Because Apple's `+animatedImage*` sucks, and the few third party implementations that
-got it right (see [Credits](#credits)) still require you to use a `UIImageView` subclass.
+Because Apple's `+animatedImage*` is not meant to be used for animated GIFs (loads all the frames in memory), and the few third party implementations that got it right (see [Credits](#credits)) still require you to use a `UIImageView` subclass, which is not very flexible and might clash with other application-specific functionality.
 
 #### How?
 
@@ -32,14 +31,16 @@ Once done, you can call `setAnimatableImage(named:)` or
 let imageView = UIImageView(...)
 
 imageView.setAnimatableImage(named: "computer-kid.gif")
-// or
-imageView.setAnimatableImage(data: NSData(...))
+// imageView.setAnimatableImage(data: NSData(...))
 ```
 
-You can start/stop the animation using `UIImageView`'s `startAnimating()` and
-`stopAnimating()`.
+The image view will not start animating until you call `startAnimating()`
+on it. You can stop the animation anytime using `stopAnimating()`, and resume
+it using `startAnimating()`.
 
-You can find a demo app in this [branch](https://github.com/kaishin/gifu/tree/demo) (requires Xcode 6).
+The `isAnimating()` method returns the current animation state of the view.
+
+For an example, check out the demo app [here](https://github.com/kaishin/gifu/tree/demo) (requires Xcode 6).
 
 <img src="https://raw.githubusercontent.com/kaishin/gifu/demo/demo.gif" width="300" />
 
